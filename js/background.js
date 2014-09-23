@@ -12,27 +12,36 @@ var $ = require('./bower_components/jquery/dist/jquery.js');
 var preferences;
 
 // executed at the extension installation
-chrome.runtime.onInstalled.addListener(function() {
+chrome.runtime.onInstalled.addListener(function () {
     console.log('on installed');
-    preferences = {
-        enable: true,
-        removeUrl: 'http://assets5.lefigaro.fr/f1g/build/',
-        redirectUrl: 'http://localhost:8000/build/'
-    };
 
     // only for *.lefigaro.fr
     var rule1 = {
         conditions: [
             new chrome.declarativeContent.PageStateMatcher({
-                pageUrl: { hostContains: 'lefigaro.fr' }
+                pageUrl: {hostContains: 'lefigaro.fr'}
             })
         ],
-        actions: [ new chrome.declarativeContent.ShowPageAction() ]
+        actions: [new chrome.declarativeContent.ShowPageAction()]
     };
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+    chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
         chrome.declarativeContent.onPageChanged.addRules([rule1]);
     });
 
+    setup();
+});
+
+chrome.runtime.onStartup.addListener(function () {
+    console.log('on startup');
+    setup();
+});
+
+function setup(){
+    preferences = {
+        enable: true,
+        removeUrl: 'http://assets5.lefigaro.fr/f1g/build/',
+        redirectUrl: 'http://localhost:8000/build/'
+    };
 
     // intercept request
     chrome.webRequest.onBeforeRequest.addListener(function (details) {
@@ -48,10 +57,9 @@ chrome.runtime.onInstalled.addListener(function() {
         ['blocking']
     );
 
-
-// ask preference
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
+    // ask preference
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         sendResponse(preferences);
     });
 
-});
+};

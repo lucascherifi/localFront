@@ -16,8 +16,7 @@ This is useful to test local developments on the assets without having to push t
 
 ## Manual
 
-
-
+![printscreen](https://raw2.github.com/hllwd/localFront/master/doc/images/printscreen.png)
 
 ## Dependencies
 

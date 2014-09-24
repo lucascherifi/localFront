@@ -82,12 +82,22 @@
 	    setup();
 	});
 
-	function setup(){
+	function setup() {
+	    var filter, actions;
+
 	    preferences = {
 	        enable: true,
 	        removeUrl: 'http://assets5.lefigaro.fr/f1g/build/',
 	        redirectUrl: 'http://localhost:8000/build/'
 	    };
+
+	    filter = {
+	        urls: [preferences.removeUrl + '*'],
+	        types: ['script']
+	    };
+
+	    actions = ['blocking'];
+
 
 	    // intercept request
 	    chrome.webRequest.onBeforeRequest.addListener(function (details) {
@@ -96,11 +106,7 @@
 	            return {
 	                redirectUrl: preferences.redirectUrl + fileName
 	            };
-	        }, {
-	            urls: [preferences.removeUrl + '*'],
-	            types: ['script']
-	        },
-	        ['blocking']
+	        }, filter, actions
 	    );
 
 	    // ask preference

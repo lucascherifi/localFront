@@ -13,7 +13,7 @@
         "scripts": ["js/background.js"
         ]
     },
-    "page_action": {
+    "browser_action": {
         "default_icon": "images/color16.png",
         "default_title": "localFront",
         "default_popup": "views/popup.html"

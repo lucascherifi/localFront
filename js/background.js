@@ -6,28 +6,12 @@
 
 ///////////// global vars
 
-// jquery
-var $ = require('./bower_components/jquery/dist/jquery.js');
 // default preferences
 var preferences;
 
 // executed at the extension installation
 chrome.runtime.onInstalled.addListener(function () {
     console.log('on installed');
-
-    // only for *.lefigaro.fr
-    var rule1 = {
-        conditions: [
-            new chrome.declarativeContent.PageStateMatcher({
-                pageUrl: {hostContains: 'lefigaro.fr'}
-            })
-        ],
-        actions: [new chrome.declarativeContent.ShowPageAction()]
-    };
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function () {
-        chrome.declarativeContent.onPageChanged.addRules([rule1]);
-    });
-
     setup();
 });
 
@@ -61,6 +45,11 @@ function setup() {
         chrome.runtime.onMessage.removeListener(callbackOnMessage);
     }
     chrome.runtime.onMessage.addListener(callbackOnMessage);
+
+    // set icon
+    chrome.browserAction.setIcon({
+        path: 'images/' + (preferences.enable ? '' : 'no') + 'color48.png'
+    });
 };
 
 function callbackOnBeforeRequest(details){

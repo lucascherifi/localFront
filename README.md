@@ -25,7 +25,9 @@ follow this [extension link]
 * set your preferences by clicking on the extension icon
 * you can easily start a new local web server with python :
 
+
     python -m SimpleHTTPServer
+
 
 ![printscreen](https://raw.githubusercontent.com/hllwd/localFront/master/doc/images/printscreen.png?token=41305__eyJzY29wZSI6IlJhd0Jsb2I6aGxsd2QvbG9jYWxGcm9udC9tYXN0ZXIvZG9jL2ltYWdlcy9wcmludHNjcmVlbi5wbmciLCJleHBpcmVzIjoxNDEyMTY1OTI0fQ%3D%3D--6807776889601c641c1b8afdffa70f9ae41cb677)
 

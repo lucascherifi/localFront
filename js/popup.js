@@ -10,7 +10,7 @@ var preferences;
 
 // first retrieve preferences
 chrome.runtime.sendMessage({
-    cmd: 'ask_preference',
+    cmd: 'ask_preferences',
     preferences: preferences
 }, function(pref){
     preferences = pref;
@@ -35,7 +35,7 @@ var onDomReady = function onDomReady(){
 
         // send new preferences to the background script
         chrome.runtime.sendMessage({
-            cmd: 'save_preference',
+            cmd: 'save_preferences',
             preferences: preferences
         });
     });

@@ -39,11 +39,7 @@ chrome.runtime.onStartup.addListener(function () {
 function setup() {
     var filter, actions;
 
-    preferences = {
-        enable: true,
-        removeUrl: 'http://assets5.lefigaro.fr/f1g/build/',
-        redirectUrl: 'http://localhost:8000/build/'
-    };
+    getPreferences();
 
     filter = {
         urls: [preferences.removeUrl + '*'],
@@ -53,18 +49,57 @@ function setup() {
     actions = ['blocking'];
 
     // intercept request
-    chrome.webRequest.onBeforeRequest.addListener(function (details) {
-            console.log(details);
-            var fileName = details.url.match(preferences.removeUrl + '(.*)')[1];
-            return {
-                redirectUrl: preferences.redirectUrl + fileName
-            };
-        }, filter, actions
-    );
+    if(chrome.webRequest.onBeforeRequest.hasListeners()){
+        chrome.webRequest.onBeforeRequest.removeListener(callbackOnBeforeRequest);
+    }
+    if(preferences.enable){
+        chrome.webRequest.onBeforeRequest.addListener(callbackOnBeforeRequest, filter, actions);
+    }
 
-    // ask preference
-    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    // messages with popup
+    if(chrome.runtime.onMessage.hasListeners()){
+        chrome.runtime.onMessage.removeListener(callbackOnMessage);
+    }
+    chrome.runtime.onMessage.addListener(callbackOnMessage);
+};
+
+function callbackOnBeforeRequest(details){
+    console.log(details);
+    var fileName = details.url.match(preferences.removeUrl + '(.*)')[1];
+    return {
+        redirectUrl: preferences.redirectUrl + fileName
+    };
+};
+
+function callbackOnMessage(request, sender, sendResponse) {
+    // ask preferences
+    if (request.cmd === 'ask_preferences') {
         sendResponse(preferences);
-    });
+    }
 
+    // save preferences
+    if (request.cmd === 'save_preferences') {
+        setPreferences(request);
+        setup();
+        sendResponse();
+    }
+}
+
+function getPreferences() {
+    preferences = localStorage.getItem('preferences');
+
+    if (preferences === null) {
+        preferences = {
+            enable: true,
+            removeUrl: 'http://assets5.lefigaro.fr/f1g/build/',
+            redirectUrl: 'http://localhost:8000/build/'
+        };
+    } else {
+        preferences = JSON.parse(preferences);
+    }
+};
+
+function setPreferences(request) {
+    preferences = request.preferences;
+    localStorage.setItem('preferences', JSON.stringify(preferences));
 };

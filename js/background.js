@@ -26,8 +26,7 @@ function setup() {
     getPreferences();
 
     filter = {
-        urls: [preferences.removeUrl + '*'],
-        types: ['script']
+        urls: [preferences.removeUrl + '*']
     };
 
     actions = ['blocking'];

@@ -1,6 +1,8 @@
 # localFront
 ---------
 
+[![Build Status](https://travis-ci.org/briocheio/localFront.svg?branch=master)](https://travis-ci.org/briocheio/localFront)
+
 A chrome extension which replaces assets scripts by local ones.
 This is useful to test local developments on the assets without having to push them on an asset server.
 

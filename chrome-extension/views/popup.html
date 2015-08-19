@@ -4,38 +4,18 @@
     <meta charset="UTF-8">
     <title>localFront</title>
 
-    <script src="../js/popup.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
 
     <style>
-        body {
-            width: 350px;
-            height: 200px;
-            font-family: "BebasNeueRegular", Arial, sans-serif;
-            font-size: 12px;
+        #container {
+            width: 800px;
+            height: auto;
         }
-
-        input {
-            width: 300px;
-            border: solid 1px #000000;
-        }
-
-        label { display: block; width: 100px; }
-
-        .submit {
-            width: 50px;
-        }
-
     </style>
+
 </head>
 <body>
-<h1>localFront for lefigaro.fr</h1>
-
-<fieldset>
-    <label for="enable">enable : </label><input class="disable" type="checkbox" id="enable"/>
-    <label for="remove-url">remove url : </label><input class="remove-url" type="text" id="remove-url"/>
-    <label for="redirect-url">redirect url : </label><input class="redirect-url" type="text" id="redirect-url"/>
-    <input class="submit" type="submit" value="save"/>
-</fieldset>
-
+<div id="container"></div>
+<script src="../js/popup.js"></script>
 </body>
 </html>

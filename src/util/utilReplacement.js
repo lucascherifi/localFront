@@ -1,19 +1,25 @@
 'use strict'
 
+import utilFilter from './utilFilter.js'
+
 let utilReplacement = {
 
     replaceUrl(filter, url){
         const regStar = /(.*)(\*)(.*)/
 
         let { urlToReplace, urlReplacement } = filter
-        let matchUrltoReplace = urlToReplace.match(regStar)
+        let matchUrlToReplace = urlToReplace.match(regStar)
         let matchUrlReplacement = urlReplacement.match(regStar)
 
-        matchUrltoReplace.shift()
+        matchUrlToReplace.shift()
         matchUrlReplacement.shift()
 
-        matchUrltoReplace.forEach( (stToReplace, ind) => {
+        matchUrlToReplace.forEach( (stToReplace, ind) => {
             !!stToReplace && (url = url.replace(stToReplace, matchUrlReplacement[ind]))
+        })
+
+        utilFilter.getNameChangesAsArray(filter).forEach( nc => {
+            url = url.replace(nc.nameToReplace, nc.nameReplacement)
         })
 
         return url

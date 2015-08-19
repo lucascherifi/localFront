@@ -6,6 +6,7 @@ import actions from '../actions/actions.js'
 import styleUrl from './styles/styleUrl.js'
 import Check from './Check.jsx'
 import FilterEdit from './FilterEdit.jsx'
+import NameChanges from './NameChanges.jsx'
 
 class Filter extends Component {
 
@@ -60,6 +61,8 @@ class Filter extends Component {
                             className="btn btn-default">edit
                     </button>
                 </div>
+
+                <NameChanges {...this.props} />
 
             </li>
         )

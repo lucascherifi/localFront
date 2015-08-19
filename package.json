@@ -4,10 +4,12 @@
   "description": "localFront ==========",
   "main": "index.js",
   "scripts": {
-    "test": "npm i && ./node_modules/.bin/karma start ./.js-tasks/karma.config.js",
+    "test": "npm i && ./node_modules/.bin/karma start ./.js-tasks/karma.config.js --single-run --browsers Firefox",
+    "test-local": "npm i && ./node_modules/.bin/karma start ./.js-tasks/karma.config.js --browsers Chrome",
+
     "local": "./node_modules/.bin/webpack --config ./.js-tasks/webpack.config.js --watch -d",
     "build": "./node_modules/.bin/webpack --config ./.js-tasks/webpack.config.js -p",
-    "postbuild": "zip -r chrome-extension.zip chrome-extension && git add chrome-extension.zip"
+    "postbuild": "zip -r chrome-extension.zip chrome-extension"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,7 @@
     "chai": "^3.2.0",
     "docco": "0.7.0",
     "karma": "^0.13.9",
+    "karma-chrome-launcher": "^0.2.0",
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.2.0",
     "karma-sourcemap-loader": "^0.3.5",

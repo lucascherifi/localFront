@@ -12,7 +12,8 @@ class FilterEdit extends Component {
         filter: PropTypes.shape({
             enable: PropTypes.bool.isRequired,
             urlToReplace: PropTypes.string.isRequired,
-            urlReplacement: PropTypes.string.isRequired
+            urlReplacement: PropTypes.string.isRequired,
+            nameChanges: PropTypes.string.isRequired
         }),
         //
         isCreated: PropTypes.bool,
@@ -22,7 +23,7 @@ class FilterEdit extends Component {
     render() {
 
         let { isCreated, filter } = this.props
-        let { urlToReplace, urlReplacement } = filter
+        let { urlToReplace, urlReplacement, nameChanges } = filter
 
         return (
             <li className={'list-group-item'}>
@@ -57,6 +58,15 @@ class FilterEdit extends Component {
                     </button>
                 </div>
 
+                <div>
+                    <label for="">name changes</label>
+                    <input type="text"
+                           defaultValue={nameChanges}
+                           placeholder="foo=>bar toto=>tata"
+                           ref="nameChanges"
+                           style={Object.assign({}, styleUrl, {width: '400px'})}/>
+                </div>
+
             </li>
         )
     }
@@ -85,7 +95,8 @@ class FilterEdit extends Component {
     retrieveDataFromRefs() {
         let f = Object.assign({}, this.props.filter, {
             urlToReplace: React.findDOMNode(this.refs.urlToReplace).value,
-            urlReplacement: React.findDOMNode(this.refs.urlReplacement).value
+            urlReplacement: React.findDOMNode(this.refs.urlReplacement).value,
+            nameChanges: React.findDOMNode(this.refs.nameChanges).value
         })
         return f
     }

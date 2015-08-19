@@ -2,10 +2,10 @@
 
 import tree from '../store.js'
 import _ from 'lodash'
-
-import utilPreferences from '../../util/utilPreferences.js'
+import utilFilter from '../../util/utilFilter.js'
 
 let serviceStore = {
+
     initStore(preferencesFromBackground){
         tree.set(preferencesFromBackground)
         tree.commit()
@@ -13,7 +13,7 @@ let serviceStore = {
 
     initNewFilter(){
         tree.select('newFilter')
-            .set(utilPreferences.getDefaultFilter())
+            .set(utilFilter.createFilter())
         tree.commit()
     },
 
@@ -43,7 +43,7 @@ let serviceStore = {
     },
 
     removeFilter(filter){
-        let index = _.findIndex( tree.select('filters').get(), {id: filter.id})
+        let index = _.findIndex(tree.select('filters').get(), {id: filter.id})
         tree
             .update({
                 'filters': {

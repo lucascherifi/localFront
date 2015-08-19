@@ -15,3 +15,6 @@ node_modules
 
 # built js
 chrome-extension/js
+
+.DS_Store
+chrome-extension/.DS_Store

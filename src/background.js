@@ -67,6 +67,10 @@ function setupRedirection() {
         console.log('il y a des listeners')
     }
 
+    chrome.browserAction.setIcon({
+        path: 'images/' + (preferences.enable ? 'favicon.png' : 'faviconNoColor.png')
+    })
+
 }
 
 function setupConnectionWithPopup(){
@@ -78,6 +82,7 @@ function setupConnectionWithPopup(){
             case constants.CMD_SET_PREFERENCES:
                 utilPreferences.set(request.preferences)
                 setupRedirection()
+
                 break
             default :
                 throw new Error('background : message not defined')

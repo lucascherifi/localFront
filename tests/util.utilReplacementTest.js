@@ -35,7 +35,7 @@ describe('utilReplacement', () => {
 
     describe('findFilter', () => {
 
-        it('should find a matching filter *', () => {
+        it('should find a matching filter with a multi dir glob', () => {
             let filter = Object.assign({}, utilPreferences.getDefaultFilter(), {
                 urlReplacement: "http://zefrqf.f1g.fr/*",
                 urlToReplace: "http://a.f1g.fr/*",
@@ -51,13 +51,44 @@ describe('utilReplacement', () => {
 
         })
 
-        it('should find a matching filter *', () => {
+        it('should find a matching filter with a simple dir glob', () => {
             let filter = Object.assign({}, utilPreferences.getDefaultFilter(), {
                 urlReplacement: "http://zefrqf.f1g.fr/*",
                 urlToReplace: "http://a.f1g.fr/*",
             })
 
             let url = 'http://a.f1g.fr/assets-css'
+
+            let foundFilter = utilReplacement.findFilter([filter], url)
+
+            console.log(foundFilter)
+
+            assert.isDefined(foundFilter)
+        })
+
+        it('should find a matching filter with a url', () => {
+            let filter = Object.assign({}, utilPreferences.getDefaultFilter(), {
+                urlReplacement: "http://zefrqf.f1g.fr/toto.js",
+                urlToReplace: "http://a.f1g.fr/tata.js",
+            })
+
+            let url = 'http://a.f1g.fr/tata.js'
+
+            let foundFilter = utilReplacement.findFilter([filter], url)
+
+            console.log(foundFilter)
+
+            assert.isDefined(foundFilter)
+
+        })
+
+        it('should find a matching filter with a cache killer glob', () => {
+            let filter = Object.assign({}, utilPreferences.getDefaultFilter(), {
+                urlReplacement: "http://zefrqf.f1g.fr/toto.js?*",
+                urlToReplace: "http://a.f1g.fr/tata.js?*",
+            })
+
+            let url = 'http://a.f1g.fr/tata.js?aefqzefqezfqzef'
 
             let foundFilter = utilReplacement.findFilter([filter], url)
 

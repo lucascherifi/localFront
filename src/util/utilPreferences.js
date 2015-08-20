@@ -14,7 +14,8 @@ let utilPreferences = {
     //      enable: <boolean>,
     //      urlToReplace: <string>,
     //      urlReplacement: <string>,
-    //      id: <string>
+    //      id: <string>,
+    //      namesChanges: <string>
     // }
     // ```
     get() {
@@ -31,16 +32,6 @@ let utilPreferences = {
     // Set preferences
     set(preferences){
         window.localStorage.setItem(constants.PREFERENCES_KEY, JSON.stringify(preferences))
-    },
-
-    getDefaultFilter(){
-        return {
-            enable: true,
-            urlToReplace: '',
-            urlReplacement: '',
-            // TODO use real uid generator
-            id: '' + new Date().getTime()
-        }
     },
 
     clean(){

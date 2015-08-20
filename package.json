@@ -1,12 +1,11 @@
 {
   "name": "localFront",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "localFront ==========",
   "main": "index.js",
   "scripts": {
     "test": "npm i && ./node_modules/.bin/karma start ./.js-tasks/karma.config.js --single-run --browsers Firefox",
     "test-local": "npm i && ./node_modules/.bin/karma start ./.js-tasks/karma.config.js --browsers Chrome",
-
     "local": "./node_modules/.bin/webpack --config ./.js-tasks/webpack.config.js --watch -d",
     "build": "./node_modules/.bin/webpack --config ./.js-tasks/webpack.config.js -p",
     "postbuild": "zip -r chrome-extension.zip chrome-extension"

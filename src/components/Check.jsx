@@ -4,7 +4,7 @@ import React, { PropTypes, Component } from 'react'
 
 class Check extends Component {
 
-    static propTypres = {
+    static propTypes = {
         isChecked: PropTypes.bool.isRequired,
         action: PropTypes.func.isRequired
     }
